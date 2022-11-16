@@ -7,7 +7,6 @@ export default function RootLayout({
     <html>
       <head />
       <body>
-        <section>1</section>
         <section>{children}</section>
       </body>
     </html>

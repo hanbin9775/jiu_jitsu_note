@@ -1,12 +1,46 @@
 .container {
-    width: 240px;
-    border-radius: 4px;
+    position: absolute;
+    cursor: pointer;
+    width: 600px;
+    border-radius: 8px;
     padding: 12px 12px 8px 12px;
     background-color: #f4d471;
     border-color: #967114;
+    background: #f4d471;
+    box-shadow:  5px 5px 50px #003e18,
+    -5px -5px 50px #00fa5e;
+}
+
+.header {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+}
+
+.title {
+    background-color: #f4d471;
+    border: none;
+    width: 100%;
+}
+
+.icon {
+    margin-left: 12px;
+    background-color: #f4d471;
+    border-radius: 50%;
+    transition: .1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon:hover {
+    background-color: rgba(60,64,67,.1);
 }
 
 .textarea {
+    margin-top: 12px;
     background-color: #f4d471;
     border: none;
     width: calc(100% - 4px);
