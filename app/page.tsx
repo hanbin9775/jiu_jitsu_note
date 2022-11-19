@@ -1,17 +1,16 @@
 "use client";
-
 import styles from "@/styles/Home.module.css";
-import Card from "./components/Card";
-import { useState } from "react";
+import { RecoilRoot } from "recoil";
+import Arrow from "./components/arrow/Arrow";
+import CardLayer from "./components/card/CardLayer";
 
 export default function Page() {
-  const [cards, setCards] = useState([]);
-
   return (
-    <main className={styles.container}>
-      <Card />
-      <Card />
-      <Card />
-    </main>
+    <RecoilRoot>
+      <main className={styles.container}>
+        <CardLayer />
+        <Arrow />
+      </main>
+    </RecoilRoot>
   );
 }
