@@ -1,20 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "@/styles/Card.module.css";
 import Draggable from "react-draggable";
 import MoreBtn from "@/assets/icon/more_btn.svg";
 import { useRecoilState } from "recoil";
 import cardsState from "@/atoms/cardsState";
 
-interface IPosition {
+export interface IPosition {
   x: number;
   y: number;
   z?: number;
 }
+
+export interface ISize {
+  width: number;
+  height: number;
+}
+
 export interface ICard {
   title?: string;
   content?: string;
   id: number;
   position: IPosition;
+  size: ISize;
+  connectedCardIds?: number[];
 }
 
 const Card = ({ title, content, id, position }: ICard) => {
@@ -28,10 +36,12 @@ const Card = ({ title, content, id, position }: ICard) => {
   const onDrag = () => {
     if (cardRef.current) {
       const { x, y, height, width } = cardRef.current.getBoundingClientRect();
-      const newPosition = { x: x + width / 2, y: y + height / 2 };
+      const newPosition = { x, y };
+      const newSize = { height: height - 20, width: width - 24 };
       const newCards = JSON.parse(JSON.stringify(cards));
+
       newCards[id].position = newPosition;
-      console.log(newPosition);
+      newCards[id].size = newSize;
       setCards(newCards);
     }
   };

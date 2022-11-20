@@ -1,14 +1,12 @@
 .container {
     position: absolute;
     cursor: pointer;
-    width: 600px;
+    width: 200px;
+    height: 250px;
     border-radius: 8px;
     padding: 12px 12px 8px 12px;
-    background-color: #f4d471;
     border-color: #967114;
     background: #f4d471;
-    box-shadow:  5px 5px 50px #003e18,
-    -5px -5px 50px #00fa5e;
 }
 
 .container:hover {
@@ -48,6 +46,6 @@
     background-color: #f4d471;
     border: none;
     width: calc(100% - 4px);
-    height: 100%;
+    height: calc(100% - 40px);
     resize: vertical;
 }

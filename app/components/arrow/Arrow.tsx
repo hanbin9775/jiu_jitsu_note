@@ -1,51 +1,65 @@
-import { getArrow } from "perfect-arrows";
+import { getArrow, getBoxToBoxArrow } from "perfect-arrows";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import cardsState from "@/atoms/cardsState";
+import { IPosition, ISize } from "../card/Card";
 
-const Arrow = () => {
-  const [cards] = useRecoilState(cardsState);
+interface IArrow {
+  fromCard: {
+    id: number;
+    position: IPosition;
+    size: ISize;
+  };
+  toCard: {
+    id: number;
+    position: IPosition;
+    size: ISize;
+  };
+}
 
+const Arrow = (props: IArrow) => {
   const [arrow, setArrow] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
   useEffect(() => {
-    if (cards !== undefined) {
-      const { x: fromX, y: fromY } = cards[0].position;
-      const { x: toX, y: toY } = cards[1].position;
-      console.log(fromX, fromY);
+    const { x: fromX, y: fromY } = props.fromCard.position;
+    const { width: fromWidth, height: fromHeight } = props.fromCard.size;
+    const { x: toX, y: toY } = props.toCard.position;
+    const { width: toWidth, height: toHeight } = props.fromCard.size;
 
-      setArrow(
-        getArrow(fromX, fromY, toX, toY, {
-          bow: 0,
+    setArrow(
+      getBoxToBoxArrow(
+        fromX,
+        fromY,
+        fromWidth,
+        fromHeight,
+        toX,
+        toY,
+        toWidth,
+        toHeight,
+        {
+          bow: 0.2,
           stretch: 0.5,
-          stretchMin: 0,
+          stretchMin: 40,
           stretchMax: 420,
           padStart: 0,
-          padEnd: 0,
+          padEnd: 20,
           flip: false,
           straights: true,
-        })
-      );
-    }
-  }, [cards]);
+        }
+      )
+    );
+  }, [props]);
 
   const [sx, sy, cx, cy, ex, ey, ae, as, sc] = arrow;
 
+  const endAngleAsDegrees = ae * (180 / Math.PI);
+
   return (
-    <svg
-      viewBox="0 0 1280 720"
-      style={{ width: 1280, height: 720 }}
-      stroke="#000"
-      fill="#000"
-      strokeWidth={3}
-    >
-      <path
-        name="line-between"
-        d={`M${sx},${sy} Q${cx},${cy} ${ex},${ey}`}
-        strokeWidth={3}
-        fill="none"
+    <>
+      <path d={`M${sx},${sy} Q${cx},${cy} ${ex},${ey}`} fill="none" />
+      <polygon
+        points="0,-6 12,0, 0,6"
+        transform={`translate(${ex},${ey}) rotate(${endAngleAsDegrees})`}
       />
-    </svg>
+    </>
   );
 };
 

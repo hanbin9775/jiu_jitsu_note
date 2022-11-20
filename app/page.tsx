@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/styles/Home.module.css";
 import { RecoilRoot } from "recoil";
-import Arrow from "./components/arrow/Arrow";
+import ArrowLayer from "./components/arrow/ArrowLayer";
 import CardLayer from "./components/card/CardLayer";
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
     <RecoilRoot>
       <main className={styles.container}>
         <CardLayer />
-        <Arrow />
+        <ArrowLayer />
       </main>
     </RecoilRoot>
   );

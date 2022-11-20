@@ -5,7 +5,7 @@ const cardsState = atom<ICard[]>({
   key: "cardsState",
   default: [
     {
-      title: "from",
+      title: "",
       content: "",
       id: 0,
       position: {
@@ -13,11 +13,14 @@ const cardsState = atom<ICard[]>({
         y: 10,
         z: 0,
       },
+      size: { width: 10, height: 20 },
+      connectedCardIds: [1],
     },
     {
-      title: "to",
+      title: "",
       content: "",
       id: 1,
+      size: { width: 10, height: 20 },
       position: {
         x: 200,
         y: 200,
