@@ -4,6 +4,7 @@ import Draggable from "react-draggable";
 import MoreBtn from "@/assets/icon/more_btn.svg";
 import { useRecoilState } from "recoil";
 import cardsState from "@/atoms/cardsState";
+import Image from "next/image";
 
 export interface IPosition {
   x: number;
@@ -37,9 +38,8 @@ const Card = ({ title, content, id, position }: ICard) => {
     if (cardRef.current) {
       const { x, y, height, width } = cardRef.current.getBoundingClientRect();
       const newPosition = { x, y };
-      const newSize = { height: height - 20, width: width - 24 };
+      const newSize = { height: height - 4, width: width - 4 };
       const newCards = JSON.parse(JSON.stringify(cards));
-
       newCards[id].position = newPosition;
       newCards[id].size = newSize;
       setCards(newCards);
@@ -60,13 +60,21 @@ const Card = ({ title, content, id, position }: ICard) => {
             <MoreBtn />
           </div>
         </h2>
-        <textarea
-          className={styles.textarea}
-          placeholder="내용을 입력해 주세요"
-          disabled={!isEditable}
-          value={newContent}
-          onChange={(e) => setNewContent(e.target.value)}
-        />
+        <div className={styles.contents}>
+          <Image
+            alt={"cardImage"}
+            width={100}
+            height={100}
+            src="/img/sample.webp"
+          />
+          <textarea
+            className={styles.textarea}
+            placeholder="내용을 입력해 주세요"
+            disabled={!isEditable}
+            value={newContent}
+            onChange={(e) => setNewContent(e.target.value)}
+          />
+        </div>
       </section>
     </Draggable>
   );
